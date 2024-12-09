@@ -1,0 +1,54 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/workflows?api-version=2016-06-01",
+    "actions": {
+      "Save_to_Blob": {
+        "inputs": {
+          "body": "@triggerBody()",
+          "host": {
+            "connection": {
+              "name": "@parameters('$connections')['azureblob']['connectionId']"
+            }
+          },
+          "method": "post",
+          "path": "/datasets/default/files"
+        },
+        "type": "ApiConnection"
+      },
+      "Send_Email": {
+        "inputs": {
+          "body": {
+            "to": "hamadabdourazak@outlook.fr",
+            "subject": "New Support Request",
+            "body": "New support request received:\n\nName: @triggerBody().name\nEmail: @triggerBody().email\nMessage: @triggerBody().message"
+          },
+          "type": "ApiConnection"
+        },
+        "type": "ApiConnection"
+      }
+    },
+    "triggers": {
+      "manual": {
+        "inputs": {
+          "schema": {
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "Request",
+        "kind": "Http"
+      }
+    }
+  }
+}
+
