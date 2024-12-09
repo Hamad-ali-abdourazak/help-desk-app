@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-# Remplacez cette URL par l'URL de votre Logic App
+#  l'URL de votre Logic App
 LOGIC_APP_URL = "https://prod-20.francecentral.logic.azure.com:443/workflows/dff0d71593a84b8e9a67e3a7d28123df/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=HiO37VGTnNQTfKFx7JqrdujV7IsGNannE6dTGkEP4EI"
 
 @app.route('/')
